@@ -39,12 +39,21 @@ export default class WidgetFileUpload {
   bindToDOM() {
     this.parentEl.innerHTML = WidgetFileUpload.markup;
 
-    this.fileContainer = this.parentEl.querySelector(WidgetFileUpload.containerSelector);
-    this.fileInput = this.fileContainer.querySelector(WidgetFileUpload.inputSelector);
-    this.overlapElement = this.fileContainer.querySelector(WidgetFileUpload.overlapSelector);
+    this.fileContainer = this.parentEl.querySelector(
+      WidgetFileUpload.containerSelector
+    );
+    this.fileInput = this.fileContainer.querySelector(
+      WidgetFileUpload.inputSelector
+    );
+    this.overlapElement = this.fileContainer.querySelector(
+      WidgetFileUpload.overlapSelector
+    );
 
     this.fileContainer.addEventListener("click", this.handlerInputFile);
-    document.documentElement.addEventListener("dragover", this.preventDefaultDragover);
+    document.documentElement.addEventListener(
+      "dragover",
+      this.preventDefaultDragover
+    );
     document.documentElement.addEventListener("drop", this.getDropFile);
   }
 
@@ -55,7 +64,7 @@ export default class WidgetFileUpload {
   getDropFile(e) {
     e.preventDefault();
 
-    if(e.target !== this.overlapElement) return; 
+    if (e.target !== this.overlapElement) return;
 
     const fileObj = e.dataTransfer.files && e.dataTransfer.files[0];
     const typeFile = e.dataTransfer.files[0].type;
@@ -80,18 +89,20 @@ export default class WidgetFileUpload {
   handlerFile(file) {
     if (!file) return;
 
-    const name = file.name
+    const name = file.name;
     const url = URL.createObjectURL(file);
 
     this.addPreviewImage(name, url);
 
-    setTimeout(() => URL.revokeObjectURL(url), 0)
+    setTimeout(() => URL.revokeObjectURL(url), 0);
   }
 
   addPreviewImage(name, url) {
     const imageElement = this._renderImage(name, url);
 
-    document.querySelector('.gallery').insertAdjacentHTML("beforeEnd", imageElement);
+    document
+      .querySelector(".gallery")
+      .insertAdjacentHTML("beforeEnd", imageElement);
 
     this.clearFileInput();
   }

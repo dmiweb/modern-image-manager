@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const gallery = new Gallery(galleryElement);
 
-  const widgetFileUpload = new WidgetFileUpload(widgetElement, gallery.renderImage);
+  const widgetFileUpload = new WidgetFileUpload(
+    widgetElement,
+    gallery.renderImage
+  );
   widgetFileUpload.bindToDOM();
 });
